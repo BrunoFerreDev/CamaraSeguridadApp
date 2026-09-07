@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.bdev.camarasec.ui.MainController"
+            style="-fx-background-color: #121212;">
+
+    <!-- Barra superior -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="12" style="-fx-background-color: #1e1e1e; -fx-padding: 10 16; -fx-border-color: #2a2a2a; -fx-border-width: 0 0 1 0;">
+            <Label text="CamaraSec" style="-fx-text-fill: #ffffff; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Label text="•" style="-fx-text-fill: #555555; -fx-font-size: 14px;"/>
+            <Label text="Monitor en vivo EZVIZ" style="-fx-text-fill: #aaaaaa; -fx-font-size: 13px;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <!-- Controles de stream, horario, grabación manual y ajustes -->
+            <Button fx:id="streamToggleButton" text="⏸ Detener Stream" onAction="#handleToggleStream"
+                    style="-fx-background-color: #c0392b; -fx-text-fill: #ffffff; -fx-background-radius: 6; -fx-padding: 4 12; -fx-font-size: 12px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+            <CheckBox fx:id="scheduleFilterCheck" text="Grabar solo en horario" selected="false"
+                      style="-fx-text-fill: #cccccc; -fx-font-size: 12px; -fx-cursor: hand;"/>
+            <Button fx:id="manualRecordButton" text="● Grabar Clip" onAction="#handleManualRecordToggle"
+                    style="-fx-background-color: #34495e; -fx-text-fill: #ffffff; -fx-background-radius: 6; -fx-padding: 4 12; -fx-font-size: 12px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+            <Button fx:id="settingsButton" text="⚙ Ajustes" onAction="#handleOpenSettings"
+                    style="-fx-background-color: #2c3e50; -fx-text-fill: #ffffff; -fx-background-radius: 6; -fx-padding: 4 12; -fx-font-size: 12px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+            <Button fx:id="ptzToggleButton" text="🎮 PTZ" onAction="#handleTogglePtzPanel"
+                    style="-fx-background-color: #2c3e50; -fx-text-fill: #ffffff; -fx-background-radius: 6; -fx-padding: 4 12; -fx-font-size: 12px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+
+            <Label fx:id="resolutionLabel" text="1080p" style="-fx-text-fill: #888888; -fx-font-size: 12px;"/>
+            <Label fx:id="motionBadge" text="MOVIMIENTO" visible="false" managed="false"
+                   style="-fx-background-color: #e74c3c; -fx-text-fill: #ffffff; -fx-padding: 3 10; -fx-background-radius: 10; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+            <Label fx:id="recordingBadge" text="REC ●" visible="false" managed="false"
+                   style="-fx-background-color: #c0392b; -fx-text-fill: #ffffff; -fx-padding: 3 10; -fx-background-radius: 10; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+            <Label fx:id="badgeLabel" text="CONECTANDO"
+                   style="-fx-background-color: #f39c12; -fx-text-fill: #ffffff; -fx-padding: 3 10; -fx-background-radius: 10; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <!-- Contenedor central de video -->
+    <center>
+        <StackPane fx:id="videoContainer" minWidth="0" minHeight="0" style="-fx-background-color: #000000;">
+            <!-- Visor de la cámara -->
+            <ImageView fx:id="cameraView" preserveRatio="true"/>
+
+            <!-- Overlay de carga/estado cuando no hay video activo -->
+            <VBox fx:id="placeholderBox" alignment="CENTER" spacing="12">
+                <Label fx:id="statusLabel" text="Conectando al stream RTSP..."
+                       style="-fx-text-fill: #aaaaaa; -fx-font-size: 15px;"/>
+            </VBox>
+        </StackPane>
+    </center>
+
+    <!-- Panel lateral derecho de control PTZ -->
+    <right>
+        <VBox fx:id="ptzPanel" visible="false" managed="false" alignment="CENTER" spacing="14"
+              style="-fx-background-color: #1a1a1a; -fx-padding: 16 14; -fx-border-color: #2a2a2a; -fx-border-width: 0 0 0 1;">
+            <Label text="CONTROL PTZ" style="-fx-text-fill: #3498db; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+            <Label text="EZVIZ C6N" style="-fx-text-fill: #888888; -fx-font-size: 10px;"/>
+
+            <GridPane hgap="6" vgap="6" alignment="CENTER" style="-fx-padding: 10 0;">
+                <!-- Botón Arriba -->
+                <Button fx:id="ptzUpButton" text="▲" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="44" prefHeight="44"
+                        style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;"/>
+                <!-- Botón Izquierda -->
+                <Button fx:id="ptzLeftButton" text="◄" GridPane.rowIndex="1" GridPane.columnIndex="0" prefWidth="44" prefHeight="44"
+                        style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;"/>
+                <!-- Botón Centro / Stop -->
+                <Button fx:id="ptzStopButton" text="⦿" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="44" prefHeight="44"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;"/>
+                <!-- Botón Derecha -->
+                <Button fx:id="ptzRightButton" text="►" GridPane.rowIndex="1" GridPane.columnIndex="2" prefWidth="44" prefHeight="44"
+                        style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;"/>
+                <!-- Botón Abajo -->
+                <Button fx:id="ptzDownButton" text="▼" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="44" prefHeight="44"
+                        style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;"/>
+            </GridPane>
+
+            <Label fx:id="ptzFeedbackLabel" text="C6N Lista" style="-fx-text-fill: #777777; -fx-font-size: 10px;"/>
+        </VBox>
+    </right>
+
+    <!-- Barra de estado inferior -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: #181818; -fx-padding: 6 16; -fx-border-color: #2a2a2a; -fx-border-width: 1 0 0 0;">
+            <Label fx:id="infoLabel" text="Cámara: Desconectada" style="-fx-text-fill: #777777; -fx-font-size: 11px;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="fpsLabel" text="0 fps" style="-fx-text-fill: #777777; -fx-font-size: 11px;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

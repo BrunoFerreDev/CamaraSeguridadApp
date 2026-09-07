@@ -1,0 +1,6 @@
+org/bdev/camarasec/core/camera/MotionDetectorTest.class
+org/bdev/camarasec/core/config/ConfigManagerTest.class
+org/bdev/camarasec/core/recorder/ClipRecorderTest.class
+org/bdev/camarasec/core/notification/TelegramNotifierTest.class
+org/bdev/camarasec/core/ptz/EzvizPtzServiceTest.class
+org/bdev/camarasec/core/recorder/PreRollBufferTest.class

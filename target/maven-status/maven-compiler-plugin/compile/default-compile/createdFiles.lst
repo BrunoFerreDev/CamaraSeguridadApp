@@ -1,0 +1,17 @@
+org/bdev/camarasec/headless/WatcherService.class
+org/bdev/camarasec/core/camera/MotionDetectionEvent.class
+org/bdev/camarasec/core/notification/TelegramNotifier.class
+org/bdev/camarasec/MainApp.class
+org/bdev/camarasec/core/camera/CameraConnector.class
+org/bdev/camarasec/core/recorder/ClipSavedListener.class
+org/bdev/camarasec/core/ptz/EzvizPtzService$1.class
+org/bdev/camarasec/core/config/AppConfig.class
+org/bdev/camarasec/core/recorder/ClipRecorder.class
+org/bdev/camarasec/core/ptz/EzvizPtzService.class
+org/bdev/camarasec/ui/MainController.class
+org/bdev/camarasec/ui/SettingsController.class
+org/bdev/camarasec/core/recorder/PreRollBuffer.class
+org/bdev/camarasec/core/camera/MotionListener.class
+org/bdev/camarasec/core/config/ConfigManager.class
+org/bdev/camarasec/core/camera/MotionDetector.class
+org/bdev/camarasec/core/ptz/PtzDirection.class

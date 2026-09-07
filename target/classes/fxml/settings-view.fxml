@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.bdev.camarasec.ui.SettingsController"
+      prefWidth="560" prefHeight="650"
+      style="-fx-background-color: #1a1a1a;">
+
+    <!-- Encabezado -->
+    <HBox alignment="CENTER_LEFT" spacing="10"
+          style="-fx-background-color: #222222; -fx-padding: 14 20; -fx-border-color: #333333; -fx-border-width: 0 0 1 0;">
+        <Label text="⚙ Configuración de CamaraSec"
+               style="-fx-text-fill: #ffffff; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Contenido con Scroll -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                style="-fx-background-color: transparent; -fx-background: #1a1a1a; -fx-border-color: transparent;">
+        <VBox spacing="18" style="-fx-padding: 16 20;">
+
+            <!-- SECCIÓN 1: Horarios y Modo -->
+            <VBox spacing="10">
+                <Label text="MODO DE NOTIFICACIÓN Y HORARIOS"
+                       style="-fx-text-fill: #3498db; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                <Separator style="-fx-opacity: 0.2;"/>
+
+                <fx:define>
+                    <ToggleGroup fx:id="modeToggleGroup"/>
+                </fx:define>
+
+                <RadioButton fx:id="homeModeRadio" text="Modo En Casa (Notificar solo en el horario programado)"
+                             toggleGroup="$modeToggleGroup" selected="true"
+                             style="-fx-text-fill: #dddddd; -fx-font-size: 13px; -fx-cursor: hand;"/>
+                <RadioButton fx:id="awayModeRadio" text="Modo Ausente (Notificar siempre 24/7)"
+                             toggleGroup="$modeToggleGroup"
+                             style="-fx-text-fill: #dddddd; -fx-font-size: 13px; -fx-cursor: hand;"/>
+
+                <GridPane hgap="12" vgap="10" style="-fx-padding: 6 0 0 20;">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="120" prefWidth="140"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label text="Hora Inicio:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <ComboBox fx:id="hourStartCombo" editable="true" prefWidth="130"
+                              GridPane.rowIndex="0" GridPane.columnIndex="1"
+                              style="-fx-background-color: #2b2b2b; -fx-border-color: #444; -fx-border-radius: 4;"/>
+
+                    <Label text="Hora Fin:" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <ComboBox fx:id="hourEndCombo" editable="true" prefWidth="130"
+                              GridPane.rowIndex="1" GridPane.columnIndex="1"
+                              style="-fx-background-color: #2b2b2b; -fx-border-color: #444; -fx-border-radius: 4;"/>
+                </GridPane>
+            </VBox>
+
+            <!-- SECCIÓN 2: Detección de Movimiento -->
+            <VBox spacing="10">
+                <Label text="DETECCIÓN DE MOVIMIENTO"
+                       style="-fx-text-fill: #3498db; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                <Separator style="-fx-opacity: 0.2;"/>
+
+                <GridPane hgap="12" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="190" prefWidth="220"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label text="Área mínima (sensibilidad px):" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <Spinner fx:id="minAreaSpinner" editable="true" prefWidth="130"
+                             GridPane.rowIndex="0" GridPane.columnIndex="1"
+                             style="-fx-background-color: #2b2b2b;"/>
+
+                    <Label text="Cooldown entre alertas (seg):" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <Spinner fx:id="cooldownSpinner" editable="true" prefWidth="130"
+                             GridPane.rowIndex="1" GridPane.columnIndex="1"
+                             style="-fx-background-color: #2b2b2b;"/>
+
+                    <Label text="Muestreo (1 frame cada N):" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <Spinner fx:id="sampleRateSpinner" editable="true" prefWidth="130"
+                             GridPane.rowIndex="2" GridPane.columnIndex="1"
+                             style="-fx-background-color: #2b2b2b;"/>
+                </GridPane>
+            </VBox>
+
+            <!-- SECCIÓN 3: Grabación y Retención -->
+            <VBox spacing="10">
+                <Label text="GRABACIÓN DE CLIPS MP4"
+                       style="-fx-text-fill: #3498db; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                <Separator style="-fx-opacity: 0.2;"/>
+
+                <GridPane hgap="12" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="190" prefWidth="220"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label text="Carpeta de destino:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                        <TextField fx:id="storageDirField" promptText="clips" HBox.hgrow="ALWAYS"
+                                   style="-fx-background-color: #2b2b2b; -fx-text-fill: white; -fx-border-color: #444; -fx-border-radius: 4; -fx-padding: 6;"/>
+                        <Button text="Examinar..." onAction="#handleBrowseStorage"
+                                style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-padding: 6 12; -fx-background-radius: 4; -fx-cursor: hand;"/>
+                    </HBox>
+
+                    <Label text="Pre-Roll buffer (seg previos):" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <Spinner fx:id="preRollSpinner" editable="true" prefWidth="130"
+                             GridPane.rowIndex="1" GridPane.columnIndex="1"
+                             style="-fx-background-color: #2b2b2b;"/>
+
+                    <Label text="Duración de cada clip (seg):" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <Spinner fx:id="clipDurationSpinner" editable="true" prefWidth="130"
+                             GridPane.rowIndex="2" GridPane.columnIndex="1"
+                             style="-fx-background-color: #2b2b2b;"/>
+
+                    <Label text="Retención de clips (días):" GridPane.rowIndex="3" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <Spinner fx:id="clipRetentionSpinner" editable="true" prefWidth="130"
+                             GridPane.rowIndex="3" GridPane.columnIndex="1"
+                             style="-fx-background-color: #2b2b2b;"/>
+                </GridPane>
+            </VBox>
+
+            <!-- SECCIÓN 4: Telegram Notifier -->
+            <VBox spacing="10">
+                <Label text="NOTIFICACIONES TELEGRAM"
+                       style="-fx-text-fill: #3498db; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                <Separator style="-fx-opacity: 0.2;"/>
+
+                <GridPane hgap="12" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="120" prefWidth="140"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label text="Bot Token:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <TextField fx:id="telegramTokenField" promptText="123456789:ABCdefGhI..."
+                               GridPane.rowIndex="0" GridPane.columnIndex="1"
+                               style="-fx-background-color: #2b2b2b; -fx-text-fill: white; -fx-border-color: #444; -fx-border-radius: 4; -fx-padding: 6;"/>
+
+                    <Label text="Chat ID:" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <TextField fx:id="telegramChatIdField" promptText="12345678"
+                               GridPane.rowIndex="1" GridPane.columnIndex="1"
+                               style="-fx-background-color: #2b2b2b; -fx-text-fill: white; -fx-border-color: #444; -fx-border-radius: 4; -fx-padding: 6;"/>
+                </GridPane>
+
+                <HBox alignment="CENTER_LEFT" spacing="12" style="-fx-padding: 4 0 0 0;">
+                    <Button fx:id="testTelegramButton" text="Probar Conexión" onAction="#handleTestTelegram"
+                            style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 6 14; -fx-background-radius: 4; -fx-cursor: hand;"/>
+                    <Label fx:id="telegramStatusLabel" text=""
+                           style="-fx-font-size: 12px;"/>
+                </HBox>
+            </VBox>
+
+            <!-- SECCIÓN 5: Stream RTSP -->
+            <VBox spacing="10">
+                <Label text="CÁMARA RTSP"
+                       style="-fx-text-fill: #3498db; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                <Separator style="-fx-opacity: 0.2;"/>
+
+                <GridPane hgap="12" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="120" prefWidth="140"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label text="URL RTSP:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <TextField fx:id="rtspUrlField" promptText="rtsp://usuario:clave@host:puerto/..."
+                               GridPane.rowIndex="0" GridPane.columnIndex="1"
+                               style="-fx-background-color: #2b2b2b; -fx-text-fill: white; -fx-border-color: #444; -fx-border-radius: 4; -fx-padding: 6;"/>
+                </GridPane>
+            </VBox>
+
+            <!-- SECCIÓN 6: Control PTZ (EZVIZ C6N) -->
+            <VBox spacing="10">
+                <Label text="CONTROL DE MOVIMIENTO PTZ (EZVIZ C6N)"
+                       style="-fx-text-fill: #3498db; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                <Separator style="-fx-opacity: 0.2;"/>
+
+                <CheckBox fx:id="ptzEnabledCheck" text="Habilitar controles PTZ en la interfaz" selected="true"
+                          style="-fx-text-fill: #dddddd; -fx-font-size: 13px; -fx-cursor: hand;"/>
+
+                <GridPane hgap="12" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="160" prefWidth="170"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label text="IP / Host de Cámara:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <TextField fx:id="ptzHostField" promptText="192.168.1.100 (vacío = extraer de RTSP)"
+                               GridPane.rowIndex="0" GridPane.columnIndex="1"
+                               style="-fx-background-color: #2b2b2b; -fx-text-fill: white; -fx-border-color: #444; -fx-border-radius: 4; -fx-padding: 6;"/>
+
+                    <Label text="Usuario Cámara:" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <TextField fx:id="ptzUsernameField" promptText="admin"
+                               GridPane.rowIndex="1" GridPane.columnIndex="1"
+                               style="-fx-background-color: #2b2b2b; -fx-text-fill: white; -fx-border-color: #444; -fx-border-radius: 4; -fx-padding: 6;"/>
+
+                    <Label text="Código Verificación (Clave):" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
+                    <PasswordField fx:id="ptzPasswordField" promptText="Código de 6 letras bajo la cámara"
+                                   GridPane.rowIndex="2" GridPane.columnIndex="1"
+                                   style="-fx-background-color: #2b2b2b; -fx-text-fill: white; -fx-border-color: #444; -fx-border-radius: 4; -fx-padding: 6;"/>
+                </GridPane>
+
+                <HBox alignment="CENTER_LEFT" spacing="12" style="-fx-padding: 4 0 0 0;">
+                    <Button fx:id="testPtzButton" text="Probar Conexión PTZ" onAction="#handleTestPtz"
+                            style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 6 14; -fx-background-radius: 4; -fx-cursor: hand;"/>
+                    <Label fx:id="ptzStatusLabel" text="" style="-fx-font-size: 12px;"/>
+                </HBox>
+            </VBox>
+
+        </VBox>
+    </ScrollPane>
+
+    <!-- Barra de acciones inferior -->
+    <HBox alignment="CENTER_RIGHT" spacing="12"
+          style="-fx-background-color: #222222; -fx-padding: 12 20; -fx-border-color: #333333; -fx-border-width: 1 0 0 0;">
+        <Label fx:id="statusLabel" text="" style="-fx-font-size: 12px;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Cancelar" onAction="#handleCancel"
+                style="-fx-background-color: #3f3f3f; -fx-text-fill: white; -fx-padding: 7 16; -fx-background-radius: 4; -fx-cursor: hand;"/>
+        <Button text="Guardar" onAction="#handleSave"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 7 18; -fx-background-radius: 4; -fx-cursor: hand;"/>
+    </HBox>
+
+</VBox>

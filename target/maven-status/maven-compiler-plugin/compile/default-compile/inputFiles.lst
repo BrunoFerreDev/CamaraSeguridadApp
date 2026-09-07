@@ -1,0 +1,16 @@
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/MainApp.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/core/camera/CameraConnector.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/core/camera/MotionDetectionEvent.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/core/camera/MotionDetector.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/core/camera/MotionListener.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/core/config/AppConfig.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/core/config/ConfigManager.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/core/notification/TelegramNotifier.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/core/ptz/EzvizPtzService.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/core/ptz/PtzDirection.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/core/recorder/ClipRecorder.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/core/recorder/ClipSavedListener.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/core/recorder/PreRollBuffer.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/headless/WatcherService.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/ui/MainController.java
+/home/brunof/Proyectos/camarasec/src/main/java/org/bdev/camarasec/ui/SettingsController.java

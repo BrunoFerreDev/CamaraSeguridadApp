@@ -1,0 +1,15 @@
+# Copiar este archivo como application.properties y completar con datos reales
+camera.rtsp.url=rtsp://admin:VERIFICATION_CODE@IP_CAMARA:554/h264/ch1/main/av_stream
+telegram.bot.token=TU_BOT_TOKEN_AQUI
+telegram.chat.id=TU_CHAT_ID_AQUI
+notification.hour.start=22:00
+notification.hour.end=07:00
+
+# Parámetros de detección de movimiento (Fase 2)
+motion.min.area=500.0
+motion.cooldown.seconds=5
+motion.sample.rate=3
+
+# Parámetros de grabación de clips (Fase 3)
+clip.duration.seconds=15
+clip.retention.days=15

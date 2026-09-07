@@ -1,0 +1,6 @@
+/home/brunof/Proyectos/camarasec/src/test/java/org/bdev/camarasec/core/camera/MotionDetectorTest.java
+/home/brunof/Proyectos/camarasec/src/test/java/org/bdev/camarasec/core/config/ConfigManagerTest.java
+/home/brunof/Proyectos/camarasec/src/test/java/org/bdev/camarasec/core/notification/TelegramNotifierTest.java
+/home/brunof/Proyectos/camarasec/src/test/java/org/bdev/camarasec/core/ptz/EzvizPtzServiceTest.java
+/home/brunof/Proyectos/camarasec/src/test/java/org/bdev/camarasec/core/recorder/ClipRecorderTest.java
+/home/brunof/Proyectos/camarasec/src/test/java/org/bdev/camarasec/core/recorder/PreRollBufferTest.java
